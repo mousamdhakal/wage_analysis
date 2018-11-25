@@ -1,0 +1,79 @@
+---
+title: "R analysis file"
+author: "Mousam"
+date: "November 25, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#loading library, 'dplyr' for data manipulation and 'ggplot2' for data visualization
+```{r}
+library(dplyr)
+library(ggplot2)
+```
+#loading the data from the dataset file in csv format
+```{r}
+wage <- read.csv("Wage.csv", stringsAsFactors = FALSE)
+#stringsAsFactors is set false to avoud crating factors if value is string
+#write.csv(wage , "Wage.csv") to write data into a csv file
+wage
+```
+# the unnecessary index column is removed
+```{r}
+wage<- select(wage , -X)
+wage
+```
+#other files like spss , excel and json can be loaded which need 'foreign', 'readxl' and 'rjson' respectively
+```{r}
+dim(wage) #dimensions of data
+cat("No. of rows:" , nrow(wage)) #concatenating the string with number of rows
+cat("\nNo. of column:", ncol(wage))
+```
+#
+```{r}
+names(wage)
+colnames(wage)#both of these show the name of header of columns
+#row.names(wage) would give name of row if there were. 
+```
+
+```{r}
+head(wage)#shows first data
+```
+```{r}
+tail(wage, 3)#second parameter specifies the number of examples to be displayed
+```
+#To show the whole dataset in a new tab
+```{r}
+View(wage)
+```
+#To count the factor values:
+```{r}
+table(wage$education)#table function counts the factor values
+```
+#To change the name of values, to make name of values more uniform
+```{r}
+wage$education[wage$education=="5. Advanced Degree"] <- "Advanced Degree"
+```
+#is.na means not available values, so we can clean and remove missing and unwanted data.
+```{r}
+sum(is.na(wage))
+```
+# Here 55 means there are 55 cells in which data is missing.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
